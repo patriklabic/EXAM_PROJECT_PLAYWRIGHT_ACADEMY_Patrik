@@ -1,0 +1,2 @@
+# EXAM_PROJECT_PLAYWRIGHT_ACADEMY_Patrik
+Finalní certifikační úloha.
