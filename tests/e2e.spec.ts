@@ -1,25 +1,26 @@
 import { test, expect } from "@playwright/test";
+import { RegisterPage } from "../src/pages/register-page.ts";
+import { LoginPage } from "../src/pages/login-page.ts";
 
 test("1.E2E Register new user on FE", async ({ page }) => {
-  await page.goto("https://playwright.dev/");
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
+  const registerPage = new RegisterPage(page);
+  await page.goto("https://tegb-frontend-88542200c6db.herokuapp.com/register");
+  //await registerPage.open();
+  await registerPage.fillUsername("USER NAME need take From API"); //!dodělat
+  await registerPage.fillPassword("API PASSWORD, need to be finnish"); //!dodělat
+  await registerPage.fillEmail("API EMAIL, need to be finnish"); //!dodělat
+  await registerPage.clickRegister();
 });
 
-test("2.E2E API new bank account.", async ({ page }) => {
-  await page.goto("https://playwright.dev/");
+test("2.E2E API new bank account.", async ({ page }) => {});
 
-  // Click the get started link.
-  await page.getByRole("link", { name: "Get started" }).click();
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(
-    page.getByRole("heading", { name: "Installation" })
-  ).toBeVisible();
+test("3.E2E New user login", async ({ page }) => {
+  const loginPage = new LoginPage(page);
+  await page.goto("https://tegb-frontend-88542200c6db.herokuapp.com");
+  await loginPage.fillUsername("USER NAME need take From API"); //!dodělat
+  await loginPage.fillPassword("API PASSWORD, need to be finnish"); //!dodělat
+  await loginPage.clickLogin();
 });
-
-test("3.E2E New user login", async ({ page }) => {});
 
 test("4.E2E Profile fill", async ({ page }) => {});
 

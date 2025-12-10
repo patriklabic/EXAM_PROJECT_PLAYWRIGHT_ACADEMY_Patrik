@@ -1,6 +1,6 @@
 import { type Locator, type Page } from "playwright";
 
-export class registerPage {
+export class RegisterPage {
   readonly page: Page;
   readonly url = "https://tegb-frontend-88542200c6db.herokuapp.com/register";
   readonly usernameInput: Locator;
@@ -31,7 +31,7 @@ export class registerPage {
   }
 
   async fillEmail(email: string) {
-    await this.passwordInput.fill(email);
+    await this.emailInput.fill(email);
   }
 
   async clickRegister() {

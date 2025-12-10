@@ -13,13 +13,10 @@ export class profilePage {
 
   constructor(page: Page) {
     this.page = page;
-    this.profileButton = page.locator(
-      "button[data-testid='toggle-edit-profile-button']"
-    );
+    // prettier-ignore
+    this.profileButton = page.locator("button[data-testid='toggle-edit-profile-button']");
     this.firstnameInput = page.locator("input[data-testid='chage-name-input']");
-    this.lastnameInput = page.locator(
-      "input[data-testid='chage-surname-input']"
-    );
+    this.lastnameInput = page.locator("input[data-testid='chage-surname-input']");
     this.emailInput = page.locator("input[data-testid='chage-email-input']");
     this.phoneInput = page.locator("button[data-testid='chage-phone-input']");
     this.ageInput = page.locator("input[data-testid='chage-age-input']");

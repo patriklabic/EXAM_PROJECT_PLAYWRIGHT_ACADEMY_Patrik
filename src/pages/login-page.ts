@@ -1,17 +1,17 @@
 import { type Locator, type Page } from "playwright";
 
-export class loginPage {
+export class LoginPage {
   readonly page: Page;
   readonly url = "https://tegb-frontend-88542200c6db.herokuapp.com";
   readonly usernameInput: Locator;
   readonly passwordInput: Locator;
-  readonly registerButton: Locator;
+  readonly loginButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
     this.usernameInput = page.locator("input[data-testid='username-input']");
     this.passwordInput = page.locator("input[data-testid='password-input']");
-    this.registerButton = page.locator("button[data-testid='submit-button']");
+    this.loginButton = page.locator("button[data-testid='submit-button']");
   }
 
   async open() {
@@ -23,8 +23,14 @@ export class loginPage {
     await this.usernameInput.fill(username);
     return this;
   }
-  async clickRegister() {
-    await this.registerButton.click();
+
+  async fillPassword(password: string) {
+    await this.passwordInput.fill(password);
+    return this;
+  }
+
+  async clickLogin() {
+    await this.loginButton.click();
   }
 }
 
