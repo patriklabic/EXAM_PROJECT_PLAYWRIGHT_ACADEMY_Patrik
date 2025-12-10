@@ -1,6 +1,15 @@
 import { test, expect } from "@playwright/test";
 import { RegisterPage } from "../src/pages/register-page.ts";
 import { LoginPage } from "../src/pages/login-page.ts";
+import { ProfilePage } from "../src/pages/profile-page.ts";
+
+test.beforeEach(async ({ page }) => {
+  const loginPage = new LoginPage(page);
+  await page.goto("https://tegb-frontend-88542200c6db.herokuapp.com");
+  await loginPage.fillUsername("patriklabic");
+  await loginPage.fillPassword("123456");
+  await loginPage.clickLogin();
+});
 
 test("1.E2E Register new user on FE", async ({ page }) => {
   const registerPage = new RegisterPage(page);
@@ -22,7 +31,17 @@ test("3.E2E New user login", async ({ page }) => {
   await loginPage.clickLogin();
 });
 
-test("4.E2E Profile fill", async ({ page }) => {});
+test("4.E2E Profile fill", async ({ page }) => {
+  const profilePage = new ProfilePage(page);
+  //await page.goto("https://tegb-frontend-88542200c6db.herokuapp.com/dashboard");
+  await profilePage.clickProfileButton();
+  await profilePage.fillFirstname("New First Name");
+  await profilePage.fillLastname("New Last Name");
+  await profilePage.fillEmail("New email");
+  await profilePage.fillPhone("123456");
+  await profilePage.fillAge("25");
+  await profilePage.clickSave();
+});
 
 test("5.E2E Check profile fill", async ({ page }) => {});
 
