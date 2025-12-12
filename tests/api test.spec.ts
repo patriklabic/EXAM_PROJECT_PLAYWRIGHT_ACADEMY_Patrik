@@ -1,7 +1,35 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
+import { request } from "http";
 
-test("1.API Login EP test", async ({ page }) => {});
+test("1.API Login EP test", async ({ request }) => {
+  await request.post(
+    "https://tegb-backend-877a0b063d29.herokuapp.com/tegb/login",
+    {
+      data: {
+        username: "patriklabic",
+        password: "123456",
+      },
+    }
+  );
+});
 
 test("2.API check status code 201 & token in response test", async ({
-  page,
-}) => {});
+  request,
+}) => {
+  const response = await request.post(
+    "https://tegb-backend-877a0b063d29.herokuapp.com/tegb/login",
+    {
+      data: {
+        username: "patriklabic",
+        password: "123456",
+      },
+    }
+  );
+  expect(response.status()).toBe(201);
+});
+
+/*Zavolá přihlašovací API (endpoint najdete v dodané Postman kolekci).
+Zkontroluje, že:
+status kód je 201,
+v response těle je token (ověřte např. existenci property typu token nebo accessToken podle skutečné struktury response).
+*/
