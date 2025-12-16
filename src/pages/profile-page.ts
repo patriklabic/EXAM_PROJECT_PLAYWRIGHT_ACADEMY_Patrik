@@ -62,6 +62,20 @@ export class ProfilePage {
   async clickSave() {
     await this.saveButton.click();
   }
+
+  async saveProfile() {
+    await Promise.all([
+      this.page.waitForResponse(
+        (res) =>
+          res
+            .url()
+            .includes(
+              "https://tegb-backend-877a0b063d29.herokuapp.com/tegb/profile"
+            ) && res.status() === 200
+      ),
+      this.saveButton.click(),
+    ]);
+  }
 }
 
 /* 
