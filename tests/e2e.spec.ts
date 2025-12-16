@@ -72,4 +72,10 @@ test("5.E2E Check profile fill", async ({ page }) => {});
 
 test("6.E2E Check bank account balance", async ({ page }) => {});
 
-test("7.E2E User log-out", async ({ page }) => {});
+test("7.E2E User log-out", async ({ page }) => {
+  const profilePage = new ProfilePage(page);
+  await profilePage.logOut();
+  await expect(page).toHaveURL(
+    "https://tegb-frontend-88542200c6db.herokuapp.com/"
+  );
+});

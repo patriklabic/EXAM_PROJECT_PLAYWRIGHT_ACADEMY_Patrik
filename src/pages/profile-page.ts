@@ -10,6 +10,7 @@ export class ProfilePage {
   readonly phoneInput: Locator;
   readonly ageInput: Locator;
   readonly saveButton: Locator;
+  readonly LogoutButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -23,6 +24,7 @@ export class ProfilePage {
     this.phoneInput = page.locator("input[data-testid='chage-phone-input']");
     this.ageInput = page.locator("input[data-testid='chage-age-input']");
     this.saveButton = page.locator("button[data-testid='save-changes-button']");
+    this.LogoutButton = page.locator("button[data-testid='logout-button']");
   }
 
   async open() {
@@ -75,6 +77,10 @@ export class ProfilePage {
       ),
       this.saveButton.click(),
     ]);
+  }
+
+  async logOut() {
+    await this.LogoutButton.click();
   }
 }
 
