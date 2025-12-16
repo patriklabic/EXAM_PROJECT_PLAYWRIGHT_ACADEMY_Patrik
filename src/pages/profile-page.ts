@@ -20,7 +20,7 @@ export class ProfilePage {
       "input[data-testid='chage-surname-input']"
     );
     this.emailInput = page.locator("input[data-testid='chage-email-input']");
-    this.phoneInput = page.locator("button[data-testid='chage-phone-input']");
+    this.phoneInput = page.locator("input[data-testid='chage-phone-input']");
     this.ageInput = page.locator("input[data-testid='chage-age-input']");
     this.saveButton = page.locator("button[data-testid='save-changes-button']");
   }
@@ -50,12 +50,12 @@ export class ProfilePage {
   }
 
   async fillPhone(phone: string) {
-    await this.emailInput.fill(phone);
+    await this.phoneInput.fill(phone);
     return this;
   }
 
   async fillAge(age: string) {
-    await this.emailInput.fill(age);
+    await this.ageInput.fill(age);
     return this;
   }
 
