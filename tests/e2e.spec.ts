@@ -68,7 +68,15 @@ test("4.E2E Profile fill", async ({ page }) => {
   await profilePage.saveProfile();
 });
 
-test("5.E2E Check profile fill", async ({ page }) => {});
+test("5.E2E Check profile fill", async ({ page }) => {
+  const profilePage = new ProfilePage(page);
+  await profilePage.clickProfileButton();
+  await expect(profilePage.firstnameInput).toHaveValue("New First Name");
+  await expect(profilePage.lastnameInput).toHaveValue("New Last Name");
+  await expect(profilePage.emailInput).toHaveValue("New email");
+  await expect(profilePage.phoneInput).toHaveValue("123456");
+  await expect(profilePage.ageInput).toHaveValue("25");
+});
 
 test("6.E2E Check bank account balance", async ({ page }) => {});
 
