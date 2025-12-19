@@ -1,5 +1,6 @@
 import { Page } from "playwright";
 import { LoginPage } from "../pages/login-page.ts";
+import { testUser } from "../utils/test-user.ts";
 
 export async function loginE2E(page: Page, username: string, password: string) {
   const loginPage = new LoginPage(page);

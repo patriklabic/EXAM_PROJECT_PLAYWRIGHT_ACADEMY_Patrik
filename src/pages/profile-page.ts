@@ -10,21 +10,37 @@ export class ProfilePage {
   readonly phoneInput: Locator;
   readonly ageInput: Locator;
   readonly saveButton: Locator;
-  readonly LogoutButton: Locator;
+  readonly logoutButton: Locator;
+  readonly headerLogo: Locator;
+  readonly leftMenuExist: Locator;
+  readonly profileDetailH2: Locator;
+  readonly profileName: Locator;
+  readonly profileLastname: Locator;
+  readonly profileEmail: Locator;
+  readonly profilePhone: Locator;
+  readonly profileAge: Locator;
 
   constructor(page: Page) {
     this.page = page;
     // prettier-ignore
     this.profileButton = page.locator("button[data-testid='toggle-edit-profile-button']");
     this.firstnameInput = page.locator("input[data-testid='chage-name-input']");
-    this.lastnameInput = page.locator(
-      "input[data-testid='chage-surname-input']"
-    );
+    // prettier-ignore
+    this.lastnameInput = page.locator("input[data-testid='chage-surname-input']");
     this.emailInput = page.locator("input[data-testid='chage-email-input']");
     this.phoneInput = page.locator("input[data-testid='chage-phone-input']");
     this.ageInput = page.locator("input[data-testid='chage-age-input']");
     this.saveButton = page.locator("button[data-testid='save-changes-button']");
-    this.LogoutButton = page.locator("button[data-testid='logout-button']");
+    this.logoutButton = page.locator("button[data-testid='logout-button']");
+    this.headerLogo = page.locator("img[data-testid='logo-img']");
+    this.leftMenuExist = page.locator("aside[class='dashboard-sidebar']");
+    // prettier-ignore
+    this.profileDetailH2 = page.locator("h2[data-testid='profile-details-title']']");
+    this.profileName = page.locator("div[data-testid='name']");
+    this.profileLastname = page.locator("div[data-testid='surname']");
+    this.profileEmail = page.locator("div[data-testid='email']");
+    this.profilePhone = page.locator("div[data-testid='phone']");
+    this.profileAge = page.locator("div[data-testid='age']");
   }
 
   async open() {
@@ -80,7 +96,7 @@ export class ProfilePage {
   }
 
   async logOut() {
-    await this.LogoutButton.click();
+    await this.logoutButton.click();
   }
 }
 

@@ -1,21 +1,25 @@
 import { test, expect } from "@playwright/test";
 import { RegisterPage } from "../src/pages/register-page.ts";
 import { LoginPage } from "../src/pages/login-page.ts";
-import { ProfilePage } from "../src/pages/profile-page.ts";
 import { loginE2E } from "../src/helpers/loginE2E.ts";
+import { faker } from "@faker-js/faker";
+import { testUser } from "../src/utils/test-user.ts";
+import { ProfilePage } from "../src/pages/profile-page.ts";
+import { register } from "module";
 
-test.beforeEach(async ({ page }) => {
+/* test.beforeEach(async ({ page }) => {.  
   await loginE2E(page, "patriklabic", "123456");
-});
+}); */
 
 test("1.E2E Register new user on FE", async ({ page }) => {
   const registerPage = new RegisterPage(page);
   await page.goto("https://tegb-frontend-88542200c6db.herokuapp.com/register");
   //await registerPage.open();
-  await registerPage.fillUsername("USER NAME need take From API"); //!dodělat faker
-  await registerPage.fillPassword("API PASSWORD, need to be finnish"); //!dodělat faker
-  await registerPage.fillEmail("API EMAIL, need to be finnish"); //!dodělat faker
+  await registerPage.fillUsername(testUser.username);
+  await registerPage.fillPassword(testUser.password);
+  await registerPage.fillEmail(testUser.email);
   await registerPage.clickRegister();
+  await expect(page.getByTestId("success-message")).toBeVisible();
 });
 
 test("2.E2E API new bank account.", async ({ request }) => {
@@ -28,6 +32,7 @@ test("2.E2E API new bank account.", async ({ request }) => {
       },
     }
   );
+
   const loginBody = await logingResponse.json();
   const token = loginBody.access_token;
 
@@ -43,11 +48,8 @@ test("2.E2E API new bank account.", async ({ request }) => {
       },
     }
   );
-
   expect(response.status()).toBe(201);
 });
-
-//?Tohle nejsem jistý, nestačí, že funknční before each a ztoho vyplivající návazné testy fungují, je dobra practise to mít i jako test?
 
 test("3.E2E New user login", async ({ page }) => {
   await loginE2E(page, "patriklabic", "123456");

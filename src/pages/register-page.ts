@@ -1,4 +1,5 @@
 import { type Locator, type Page } from "playwright";
+import { testUser } from "../utils/test-user.ts";
 
 export class RegisterPage {
   readonly page: Page;
@@ -37,6 +38,19 @@ export class RegisterPage {
   async clickRegister() {
     await this.registerButton.click();
   }
+  /*
+  async register(username: string, password: string, email: string) {
+    await this.open();
+    await this.fillUsername(testUser.username);
+    await this.fillUsername(testUser.password);
+    await this.fillEmail(testUser.email);
+
+  
+    await this.page.fill(th, username);
+    await this.page.fill("#password", password);
+    await this.page.fill("#email", email);
+    await this.page.click('button[type="submit"]');
+  */
 }
 
 /* 
