@@ -14,17 +14,16 @@ Atomické testy by měly obsahovat:
 kontrolu viditelnosti/existence prvků
 U statických prvků (nemění se jim text) kontrola textu
 základní kontrolu funkcionality (např. kliknutí na odhlášení - zobrazí se přihlašovací stránka).
-
-
-
 */
+
+//! TO DO .log
 
 import { expect, test } from "playwright/test";
 import { ProfilePage } from "../src/pages/profile-page.ts";
 import { loginE2E } from "../src/helpers/loginE2E.ts";
 
 test.beforeEach(async ({ page }) => {
-  await loginE2E(page, "patriklabic", "123456");
+  await loginE2E(page, "Jerrell_Kreiger24", "123456");
   await expect(page).toHaveURL(
     "https://tegb-frontend-88542200c6db.herokuapp.com/dashboard"
   );
@@ -50,4 +49,21 @@ test("Atomic test Dashboard profile section", async ({ page }) => {
   await expect.soft(profilePage.profileEmail).toBeVisible();
   await expect.soft(profilePage.profilePhone).toBeVisible();
   await expect.soft(profilePage.profileAge).toBeVisible();
+});
+
+test("Atomic test Dashboard account section", async ({ page }) => {
+  const profilePage = new ProfilePage(page);
+  await expect.soft(profilePage.dashboardMainSection).toBeVisible();
+  await expect.soft(profilePage.accountButtonAdd).toBeVisible();
+  await expect.soft(profilePage.accountSection).toBeVisible();
+  await expect.soft(profilePage.accountTableHeadingNumber).toBeVisible();
+  await expect.soft(profilePage.accountTableHeadingBalance).toBeVisible();
+  await expect.soft(profilePage.accountTableHeadingType).toBeVisible();
+  await expect.soft(profilePage.accountTableRow0).toBeVisible();
+});
+
+test("Atomic test Dashboard footer section", async ({ page }) => {
+  const profilePage = new ProfilePage(page);
+  await expect.soft(profilePage.dashboardFooter).toBeVisible();
+  await expect.soft(profilePage.dashboardFooterCopyright).not.toHaveText("");
 });

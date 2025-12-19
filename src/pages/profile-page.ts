@@ -19,6 +19,16 @@ export class ProfilePage {
   readonly profileEmail: Locator;
   readonly profilePhone: Locator;
   readonly profileAge: Locator;
+  readonly accountH2: Locator;
+  readonly accountButtonAdd: Locator;
+  readonly dashboardMainSection: Locator;
+  readonly dashboardFooter: Locator;
+  readonly dashboardFooterCopyright: Locator;
+  readonly accountSection: Locator;
+  readonly accountTableHeadingNumber: Locator;
+  readonly accountTableHeadingBalance: Locator;
+  readonly accountTableHeadingType: Locator;
+  readonly accountTableRow0: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -35,12 +45,30 @@ export class ProfilePage {
     this.headerLogo = page.locator("img[data-testid='logo-img']");
     this.leftMenuExist = page.locator("aside[class='dashboard-sidebar']");
     // prettier-ignore
-    this.profileDetailH2 = page.locator("h2[data-testid='profile-details-title']']");
+    this.profileDetailH2 = page.locator("h2[data-testid='profile-details-title']");
     this.profileName = page.locator("div[data-testid='name']");
     this.profileLastname = page.locator("div[data-testid='surname']");
     this.profileEmail = page.locator("div[data-testid='email']");
     this.profilePhone = page.locator("div[data-testid='phone']");
     this.profileAge = page.locator("div[data-testid='age']");
+    this.accountH2 = page.locator("h2[data-testid='accounts-title']");
+    // prettier-ignore
+    this.accountButtonAdd = page.locator("button[data-testid='add-account-button']");
+    // prettier-ignore
+    this.dashboardMainSection = page.locator("main[data-testid='dashboard-content']");
+    // prettier-ignore
+    this.dashboardFooter = page.locator("//footer[@class='dashboard-footer']");
+    // prettier-ignore
+    this.dashboardFooterCopyright = page.locator("//footer[span='© 2023 Banking App']");
+    this.accountSection = page.locator(".accounts");
+    // prettier-ignore
+    this.accountTableHeadingNumber = page.locator("th[data-testid='account-number-heading']");
+    // prettier-ignore
+    this.accountTableHeadingBalance = page.locator("th[data-testid='account-balance-heading']");
+    // prettier-ignore
+    this.accountTableHeadingType = page.locator("th[data-testid='account-type-heading']");
+    // prettier-ignore
+    this.accountTableRow0 = page.locator("tr[data-testid='account-row-0']");
   }
 
   async open() {
