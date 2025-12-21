@@ -1,3 +1,5 @@
+/** @format */
+
 import { type Locator, type Page } from "playwright";
 
 export class ProfilePage {
@@ -12,6 +14,7 @@ export class ProfilePage {
   readonly saveButton: Locator;
   readonly logoutButton: Locator;
   readonly headerLogo: Locator;
+  readonly headerAppName: Locator;
   readonly leftMenuExist: Locator;
   readonly profileDetailH2: Locator;
   readonly profileName: Locator;
@@ -29,6 +32,9 @@ export class ProfilePage {
   readonly accountTableHeadingBalance: Locator;
   readonly accountTableHeadingType: Locator;
   readonly accountTableRow0: Locator;
+  readonly accountTableRow0Number: Locator;
+  readonly accountTableRow0Balance: Locator;
+  readonly accountTableRow0Type: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -43,6 +49,8 @@ export class ProfilePage {
     this.saveButton = page.locator("button[data-testid='save-changes-button']");
     this.logoutButton = page.locator("button[data-testid='logout-button']");
     this.headerLogo = page.locator("img[data-testid='logo-img']");
+    // prettier-ignore
+    this.headerAppName = page.locator("span[data-testid='app-title']");
     this.leftMenuExist = page.locator("aside[class='dashboard-sidebar']");
     // prettier-ignore
     this.profileDetailH2 = page.locator("h2[data-testid='profile-details-title']");
@@ -69,6 +77,12 @@ export class ProfilePage {
     this.accountTableHeadingType = page.locator("th[data-testid='account-type-heading']");
     // prettier-ignore
     this.accountTableRow0 = page.locator("tr[data-testid='account-row-0']");
+    // prettier-ignore
+    this.accountTableRow0Number = page.locator("td[data-testid='account-number']");
+    // prettier-ignore
+    this.accountTableRow0Balance = page.locator("td[data-testid='account-balance']");
+    // prettier-ignore
+    this.accountTableRow0Type = page.locator("td[data-testid='account-type']");
   }
 
   async open() {
@@ -113,11 +127,8 @@ export class ProfilePage {
     await Promise.all([
       this.page.waitForResponse(
         (res) =>
-          res
-            .url()
-            .includes(
-              "https://tegb-backend-877a0b063d29.herokuapp.com/tegb/profile"
-            ) && res.status() === 200
+          res.url().includes("https://tegb-backend-877a0b063d29.herokuapp.com/tegb/profile") &&
+          res.status() === 200
       ),
       this.saveButton.click(),
     ]);

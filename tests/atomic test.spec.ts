@@ -1,20 +1,22 @@
-/*
-. Atomické testy
-Vytvořte Atomické testy na Dashboard.
-
-Otestujte minimálně tyto oblasti:
-Hlavička
-Levé menu
-Obsah dashboardu (účty, profil)
-
-Není nutné testovat samotnou změnu profilových dat (to už je pokryté v E2E).
-
-Atomické testy by měly obsahovat:
-
-kontrolu viditelnosti/existence prvků
-U statických prvků (nemění se jim text) kontrola textu
-základní kontrolu funkcionality (např. kliknutí na odhlášení - zobrazí se přihlašovací stránka).
-*/
+/**
+ * . Atomické testy
+ * Vytvořte Atomické testy na Dashboard.
+ *
+ * Otestujte minimálně tyto oblasti:
+ * Hlavička
+ * Levé menu
+ * Obsah dashboardu (účty, profil)
+ *
+ * Není nutné testovat samotnou změnu profilových dat (to už je pokryté v E2E).
+ *
+ * Atomické testy by měly obsahovat:
+ *
+ * kontrolu viditelnosti/existence prvků
+ * U statických prvků (nemění se jim text) kontrola textu
+ * základní kontrolu funkcionality (např. kliknutí na odhlášení - zobrazí se přihlašovací stránka).
+ *
+ * @format
+ */
 
 //! TO DO .log
 
@@ -24,15 +26,15 @@ import { loginE2E } from "../src/helpers/loginE2E.ts";
 
 test.beforeEach(async ({ page }) => {
   await loginE2E(page, "Jerrell_Kreiger24", "123456");
-  await expect(page).toHaveURL(
-    "https://tegb-frontend-88542200c6db.herokuapp.com/dashboard"
-  );
+  await expect(page).toHaveURL("https://tegb-frontend-88542200c6db.herokuapp.com/dashboard");
 });
 
 test("Atomic test Header section", async ({ page }) => {
   const profilePage = new ProfilePage(page);
   await expect.soft(profilePage.headerLogo).toBeVisible();
   await expect.soft(profilePage.logoutButton).toBeVisible();
+  await expect.soft(profilePage.headerAppName).toBeVisible();
+  await expect.soft(profilePage.headerAppName).toHaveText("TEG#B Dashboard");
 });
 
 test("Atomic test Left menu", async ({ page }) => {
@@ -57,9 +59,15 @@ test("Atomic test Dashboard account section", async ({ page }) => {
   await expect.soft(profilePage.accountButtonAdd).toBeVisible();
   await expect.soft(profilePage.accountSection).toBeVisible();
   await expect.soft(profilePage.accountTableHeadingNumber).toBeVisible();
+  await expect.soft(profilePage.accountTableHeadingNumber).toHaveText("Číslo účtu");
   await expect.soft(profilePage.accountTableHeadingBalance).toBeVisible();
+  await expect.soft(profilePage.accountTableHeadingBalance).toHaveText("Zůstatek");
   await expect.soft(profilePage.accountTableHeadingType).toBeVisible();
+  await expect.soft(profilePage.accountTableHeadingType).toHaveText("Typ účtu");
   await expect.soft(profilePage.accountTableRow0).toBeVisible();
+  await expect.soft(profilePage.accountTableRow0Number).toBeVisible();
+  await expect.soft(profilePage.accountTableRow0Number).toBeVisible();
+  await expect.soft(profilePage.accountTableRow0Type).toBeVisible();
 });
 
 test("Atomic test Dashboard footer section", async ({ page }) => {
