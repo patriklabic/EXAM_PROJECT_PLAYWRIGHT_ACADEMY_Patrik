@@ -1,23 +1,22 @@
+/** @format */
+
 import { test, expect } from "@playwright/test";
 import { RegisterPage } from "../src/pages/register-page.ts";
 import { LoginPage } from "../src/pages/login-page.ts";
 import { loginE2E } from "../src/helpers/loginE2E.ts";
 import { faker } from "@faker-js/faker";
-import { testUser } from "../src/utils/test-user.ts";
+import { testUserRegister } from "../src/utils/test-user.ts";
 import { ProfilePage } from "../src/pages/profile-page.ts";
 import { register } from "module";
-
-/* test.beforeEach(async ({ page }) => {.  
-  await loginE2E(page, "patriklabic", "123456");
-}); */
+import { testUser24 } from "../src/utils/test-user.ts";
 
 test("1.E2E Register new user on FE", async ({ page }) => {
   const registerPage = new RegisterPage(page);
   await page.goto("https://tegb-frontend-88542200c6db.herokuapp.com/register");
   //await registerPage.open();
-  await registerPage.fillUsername(testUser.username);
-  await registerPage.fillPassword(testUser.password);
-  await registerPage.fillEmail(testUser.email);
+  await registerPage.fillUsername(testUserRegister.username);
+  await registerPage.fillPassword(testUserRegister.password);
+  await registerPage.fillEmail(testUserRegister.email);
   await registerPage.clickRegister();
   await expect(page.getByTestId("success-message")).toBeVisible();
 });
@@ -52,13 +51,12 @@ test("2.E2E API new bank account.", async ({ request }) => {
 });
 
 test("3.E2E New user login", async ({ page }) => {
-  await loginE2E(page, "patriklabic", "123456");
-  await expect(page).toHaveURL(
-    "https://tegb-frontend-88542200c6db.herokuapp.com/dashboard"
-  );
+  await loginE2E(page, testUser24.username24, testUser24.password24);
+  await expect(page).toHaveURL("https://tegb-frontend-88542200c6db.herokuapp.com/dashboard");
 });
 
 test("4.E2E Profile fill", async ({ page }) => {
+  await loginE2E(page, testUser24.username24, testUser24.password24);
   const profilePage = new ProfilePage(page);
   await profilePage.clickProfileButton();
   await profilePage.fillFirstname("New First Name");
@@ -71,6 +69,7 @@ test("4.E2E Profile fill", async ({ page }) => {
 });
 
 test("5.E2E Check profile fill", async ({ page }) => {
+  await loginE2E(page, testUser24.username24, testUser24.password24);
   const profilePage = new ProfilePage(page);
   await profilePage.clickProfileButton();
   await expect(profilePage.firstnameInput).toHaveValue("New First Name");
@@ -80,12 +79,17 @@ test("5.E2E Check profile fill", async ({ page }) => {
   await expect(profilePage.ageInput).toHaveValue("25");
 });
 
-test("6.E2E Check bank account balance", async ({ page }) => {});
+test("6.E2E Check bank account balance", async ({ page }) => {
+  await loginE2E(page, testUser24.username24, testUser24.password24);
+  const profilePage = new ProfilePage(page);
+  await expect(profilePage.accountTableRow0Balance).toBeVisible();
+
+  expect(profilePage.accountTableRow0Balance).toContainText("10000.0");
+});
 
 test("7.E2E User log-out", async ({ page }) => {
+  await loginE2E(page, testUser24.username24, testUser24.password24);
   const profilePage = new ProfilePage(page);
   await profilePage.logOut();
-  await expect(page).toHaveURL(
-    "https://tegb-frontend-88542200c6db.herokuapp.com/"
-  );
+  await expect(page).toHaveURL("https://tegb-frontend-88542200c6db.herokuapp.com/");
 });
