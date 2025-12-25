@@ -12,3 +12,8 @@ export const testUser24 = {
   username24: "Jerrell_Kreiger24",
   password24: "123456",
 };
+
+export const testUserPatrik = {
+  usernamepatrik: "patriklabic",
+  passwordpatrik: "123456",
+};
