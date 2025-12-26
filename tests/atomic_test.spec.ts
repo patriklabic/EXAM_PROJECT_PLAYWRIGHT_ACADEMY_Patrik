@@ -1,7 +1,7 @@
 /** @format */
 
 import { expect, test } from "playwright/test";
-import { ProfilePage } from "../src/pages/profile-page.ts";
+import { ProfilePage } from "../src/pages/profile_page.ts";
 import { loginE2E } from "../src/helpers/loginE2E.ts";
 
 test.beforeEach(async ({ page }) => {

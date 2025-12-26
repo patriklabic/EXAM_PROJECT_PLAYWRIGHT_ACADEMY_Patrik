@@ -1,14 +1,14 @@
 /** @format */
 
 import { test, expect } from "@playwright/test";
-import { RegisterPage } from "../src/pages/register-page.ts";
-import { LoginPage } from "../src/pages/login-page.ts";
+import { RegisterPage } from "../src/pages/register_page.ts";
+import { LoginPage } from "../src/pages/login_page.ts";
 import { loginE2E } from "../src/helpers/loginE2E.ts";
 import { faker } from "@faker-js/faker";
-import { testUserRegister } from "../src/utils/test-user.ts";
-import { ProfilePage } from "../src/pages/profile-page.ts";
+import { testUserRegister } from "../src/utils/test_user.ts";
+import { ProfilePage } from "../src/pages/profile_page.ts";
 import { register } from "module";
-import { testUser24 } from "../src/utils/test-user.ts";
+import { testUser24 } from "../src/utils/test_user.ts";
 
 test("1.E2E Register new user on FE", async ({ page }) => {
   const registerPage = new RegisterPage(page);
@@ -84,7 +84,7 @@ test("6.E2E Check bank account balance", async ({ page }) => {
   const profilePage = new ProfilePage(page);
   await expect(profilePage.accountTableRow0Balance).toBeVisible();
 
-  expect(profilePage.accountTableRow0Balance).toContainText("10000.0");
+  await expect(profilePage.accountTableRow0Balance).toContainText("10000.0");
 });
 
 test("7.E2E User log-out", async ({ page }) => {
